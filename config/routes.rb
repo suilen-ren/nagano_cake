@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  devise_for :customers
+  namespace :admin do
+    resources :genres, only: [:index,:create,:edit,:update]
+    
+  end
+  devise_for :admin,conrollers: {
+    sessions: "admin/sessions",
+    passwords: "admin/passwords",
+    registrations: "admin/registrations"
+  }
+  devise_for :customer
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

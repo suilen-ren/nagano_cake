@@ -1,5 +1,6 @@
 class Admin::ItemsController < ApplicationController
   def index
+    @items = Item.all
   end
 
   def new
@@ -17,9 +18,22 @@ class Admin::ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
+    @price_with_tax = (@item.price * 1.1).to_i
   end
 
   def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      flash[:notice] = "商品の更新が成功しました"
+      redirect_to admin_item_path(@item.id)
+    else
+      render :edit
+    end
   end
 
   private

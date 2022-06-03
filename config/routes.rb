@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show,:edit,:update]
     root :to =>"homes#top"
     resources :orders , only: [:show, :update]
+      resource :order_items, only:[:update]
   end
   devise_for :admin,conrollers: {
     sessions: "admin/sessions",

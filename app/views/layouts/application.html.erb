@@ -20,6 +20,20 @@
     <li><%= link_to "ジャンル一覧" ,admin_genres_path %></li>
     <li></li>
   </ul>
+  <ul>
+    <li>ログインしてない人用</li>
+    <li><%= link_to "about", about_path %></li>
+    <li>商品一覧</li>
+    <li><%= link_to "新規登録", new_customer_registration_path %></li>
+    <li><%= link_to "ログイン", new_customer_session_path %></li>
+  </ul>
+  <ul>
+    <li>ログイン中カスタマー用</li>
+    <li>マイページ</li>
+    <li>商品一覧</li>
+    <li>カート</li>
+    <li><%= link_to "ログアウト",destroy_customer_session_path ,method: :delete %></li>
+  </ul>
     <%= yield %>
   </body>
 </html>

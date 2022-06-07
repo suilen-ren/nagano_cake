@@ -1,6 +1,6 @@
 <h3><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h3>
 
-<%= form_with model: @customer ,url: "/admin/customers/#{@customer.id}/edit" do |f| %>
+<%= form_with model: @customer ,url: "/admin/customers/#{@customer.id}" do |f| %>
   <table>
     <thead>
       <tr>

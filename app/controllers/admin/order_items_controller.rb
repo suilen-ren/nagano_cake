@@ -2,6 +2,7 @@ class Admin::OrderItemsController < ApplicationController
   def update
     @order_item = Order_item(params[:id])
     @order_item.update(order_item_params)
+    
 
     if @order_item.order.order_items.all? {making_status == 4}
       @order_item.order.status = 4

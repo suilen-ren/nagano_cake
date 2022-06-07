@@ -25,6 +25,8 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 
+gem 'kaminari' ,'~>1.2.1'
+
 gem 'devise'
 
 gem 'refile', require: 'refile/rails',github: 'manfe/refile'

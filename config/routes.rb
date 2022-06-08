@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
 
-
-  namespace :public do
-  end
-  resources 
   root to: "public/homes#top"
   get 'about' => "public/homes#about"
 
+  scope module: :public do
+    resource :my_pages, path: "/my_page" ,only: [:show,:edit,:update] do
+      get 'confirm'
+      patch 'leave'
+    end
+  end
+
   namespace :admin do
-    resources :genres,path: '/genres', only: [:index,:create,:edit,:update]
+    resources :genres, only: [:index,:create,:edit,:update]
     resources :items, only: [:new,:index,:create,:show,:edit,:update]
     resources :customers, only: [:index, :show,:edit,:update]
     root to:  "homes#top"

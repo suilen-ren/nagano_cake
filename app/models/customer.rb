@@ -10,4 +10,7 @@ class Customer < ApplicationRecord
             :email, :encrypted_password, :postal_code, :address, :telephone_number,
             presence: true
   validates :is_active, inclusion: {in:[true,false]}
+  def active_for_authentication?
+    super && (is_active == true)
+  end
 end

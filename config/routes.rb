@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
 
+
   root to: "public/homes#top"
   get 'about' => "public/homes#about"
-
   scope module: :public do
     resource :my_pages, path: "/my_page" ,only: [:show,:edit,:update] do
       get 'confirm'
       patch 'leave'
     end
+    resources :addresses ,only: [:index, :edit,:create,:update ,:destroy]
   end
 
   namespace :admin do

@@ -1,4 +1,5 @@
 class Admin::GenresController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @genres = Genre.all
     @genre = Genre.new
@@ -7,8 +8,8 @@ class Admin::GenresController < ApplicationController
   def create
     @genre = Genre.new
     @genres = Genre.all
-    @genre = Genre.new(genre_params)
-    if @genre.save
+    @creategenre = Genre.new(genre_params)
+    if @creategenre.save
       redirect_to "/admin/genres", notice: "ジャンルの作成に成功しました"
     else
       flash[:notice] = "ジャンル名を入力してください"

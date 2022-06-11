@@ -1,4 +1,5 @@
 class Admin::OrderItemsController < ApplicationController
+  before_action :authenticate_admin!
   def update
     @order_item = Order_item(params[:id])
     @order_item.update(order_item_params)

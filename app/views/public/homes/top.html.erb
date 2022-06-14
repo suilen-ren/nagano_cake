@@ -2,7 +2,7 @@
 
 <h3>新着商品</h3>
 <% @items.each do |item| %>
-  <%= image_tag item.photo_item %>
+  <%= image_tag item.get_item_image(100,100) %>
   <%= item.name %>
   <%= item.price %>円
 <% end %>

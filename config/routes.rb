@@ -3,12 +3,17 @@ Rails.application.routes.draw do
 
   root to: "public/homes#top"
   get 'about' => "public/homes#about"
+
   scope module: :public do
+    resources :cart_items ,only: [:index,:update,:destroy,:create] do
+      delete 'destroy_all' ,on: :collection
+    end
     resource :my_pages, path: "/my_page" ,only: [:show,:edit,:update] do
       get 'confirm'
       patch 'leave'
     end
     resources :addresses ,only: [:index, :edit,:create,:update ,:destroy]
+    resources :items ,only: [:index, :show]
   end
 
   namespace :admin do

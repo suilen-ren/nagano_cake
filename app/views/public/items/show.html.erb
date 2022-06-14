@@ -1,0 +1,37 @@
+<div class ="container p-5">
+  <div class ="row">
+    <div class = "col-3">
+      a<%#ここにジャンル検索が来る予定%>
+    </div>
+
+    <div class = " col-8 offset-1">
+      <div>
+        <div class ="item-photo d-inline-block">
+          <%= image_tag @item.get_item_image(250,200) %>
+        </div>
+        <div class="d-inline-block ml-2 my-auto">
+          <div class ="d-block pb-3">
+            <h3><%= @item.name %></h3>
+            <h4><%= @item.introduction %></h4>
+          </div>
+          <div class ="price d-block">
+            <h4 class ="d-inline">￥<%= @item.price %></h4>
+            <h5 class="d-inline">(税込)</h5>
+          </div>
+          <div class ="cart d-block">
+            <% if customer_signed_in? %>
+              <%= form_with model: @cart_item, url: "/cart_items" do |f| %>
+                <%= f.hidden_field :item_id , value: @item.id %>
+                <%= f.select :quantity ,[["1",1],["2",2],["3",3],["4",4],["5",5],["6",6],["7",7],["8",8],["9",9],["10",10]] ,prompt: "個数選択"%>
+                <%= f.submit "カートに入れる" ,class: "btn btn-primary" %>
+              <% end %>
+            <% else %>
+                  <p>買い物をするには<%= link_to "ログイン" ,new_customer_session_path %>が必要です</p>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

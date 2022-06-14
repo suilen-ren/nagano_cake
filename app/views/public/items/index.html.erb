@@ -1,0 +1,23 @@
+<div class ="container p-5">
+  <div class ="row">
+    <div class ="col-3">
+      <%# サイドバーをここに実装する予定　%>
+    </div>
+  </div>
+
+  <div class "col-8 offset-1 mx-2">
+    <h2 class ="d-inline">商品一覧</h2>
+    <h5 class ="d-inline">全<%= @items.count %>件</h5>
+  </div>
+
+  <% @items.each do |item| %>
+    <div class "item-box d-inline-block">
+      <%= link_to item_path(item.id) do %>
+        <%= image_tag item.get_item_image(150,100) %>
+      <% end %>
+      <strong class ="d-block"><%= item.name %></strong>
+      <strong class ="d-block">￥<%= item.price %></strong>
+    </div>
+  <% end %>
+
+</div>

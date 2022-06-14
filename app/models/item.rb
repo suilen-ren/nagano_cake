@@ -4,6 +4,10 @@ class Item < ApplicationRecord
   has_many :order_items
   has_one_attached :photo_item
 
+  def get_item_image(width, height)
+    photo_item.variant(resize_to_limit:[width,height]).processed
+  end
+
   validates :genre_id ,presence: true
   validates :name ,presence: true
   validates :introduction ,presence: true

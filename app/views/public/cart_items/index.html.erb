@@ -1,0 +1,33 @@
+<div class ="container p-5">
+  <div class ="row">
+    <div class ="col-10">
+      <h2 class ="d-inline">ショッピングカート</h2>
+      <%= link_to "全て削除" ,destroy_all_cart_items_path, method: :delete, class: "btn btn-danger d-inline" %>
+      <table class ="table my-3">
+        <thead class ="thead-dark" %>
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th></th>
+          </tr>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td><%= image_tag cart_item.item.get_item_image(50,50) %> <%= cart_item.item.name %></td>
+              <td><%= (cart_item.item.price * 1.1).to_i %></td>
+              <td>
+                <%= form_with model: cart_item ,url: "/cart_items/#{cart_item.id}" do |f| %>
+                  <%= f.select :quantity ,[["1",1],["2",2],["3",3],["4",4],["5",5],["6",6],["7",7],["8",8],["9",9],["10",10]] %>
+                  <%= f.submit "変更" %>
+                <% end %>
+              </td>
+              <td> <%= (cart_item.item.price * cart_item.quantity * 1.1).to_i %></td>
+              <td><%= link_to "削除する" ,"cart_items/#{cart_item.id}" ,method: :delete ,class: "btn btn-danger" %> </td>
+            </tr>
+          <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

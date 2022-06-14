@@ -1,4 +1,5 @@
 class Public::AddressesController < ApplicationController
+  before_action :authenticate_customer!
   before_action :ensure_current_customer, {only: [:edit, :update,:destroy]}
 
   def ensure_current_customer

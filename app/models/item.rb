@@ -14,4 +14,8 @@ class Item < ApplicationRecord
   validates :price ,presence: true
   validates :is_active ,inclusion: {in: [true,false]}
   validates :photo_item ,presence: true
+  
+  def price_with_tax
+    (price * 1.1).floor
+  end
 end

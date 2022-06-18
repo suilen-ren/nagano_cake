@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   get 'about' => "public/homes#about"
 
   scope module: :public do
+    resources :orders, only: [:new,:create,:index,:show] do
+      post 'confirm' ,on: :collection
+      get 'complete' ,on: :collection
+    end
     resources :cart_items ,only: [:index,:update,:destroy,:create] do
       delete 'destroy_all' ,on: :collection
     end
@@ -22,7 +26,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show,:edit,:update]
     root to:  "homes#top"
     resources :orders , only: [:show, :update]
-      resource :order_items, only:[:update]
+    resources :order_items, only:[:update]
   end
   devise_for :admin,skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions",

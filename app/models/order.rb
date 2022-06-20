@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   has_many :order_items
 
   enum payment: {credit_card: 0, transfer: 1}
+  enum status: {wait_for_transfer: 1, transfered: 2, processing:3 ,prepare_shipping: 4 ,shipped:5}
 
 
   validates :customer_id, :ship_address, :ship_name,

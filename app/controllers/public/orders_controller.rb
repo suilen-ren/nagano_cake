@@ -8,6 +8,8 @@ class Public::OrdersController < ApplicationController
   def confirm
     @order = Order.new(confirm_params)
     @cart_items= CartItem.where(customer_id: current_customer.id)
+
+    # 以下、フォームの不備があった際に前ページへリダイレクトさせ、正しかった場合は確認ページへ遷移するように設定しています。
     if params[:order][:select_address] == nil || params[:order][:payment] == nil
       redirect_to new_order_path
     elsif @order.select_address == 1
@@ -31,11 +33,15 @@ class Public::OrdersController < ApplicationController
       elsif params[:order][:ship_name].blank?
         redirect_to new_order_path
       end
+    else
+      redirect_to new_order_path
     end
+    #合計金額の処理
     @order.amount = 0
     @cart_items.each do |cart_item|
       @order.amount = @order.amount + cart_item.subtotal
     end
+    #送料の設定
     @order.postage = 800
 
   end
@@ -50,12 +56,10 @@ class Public::OrdersController < ApplicationController
       @order_item.order_id = @order.id
       @order_item.price_then = cart_item.item.price
       @order_item.quantity = cart_item.quantity
-      binding.pry
-      @order_item.save!
+      @order_item.save
     end
     current_customer.cart_items.destroy_all
     redirect_to complete_orders_path
-
   end
 
   def complete
@@ -63,6 +67,7 @@ class Public::OrdersController < ApplicationController
 
 
   def index
+    @orders = Order.where(customer_id: current_customer.id)
   end
 
   def show

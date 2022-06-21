@@ -14,7 +14,8 @@ class Admin::ItemsController < ApplicationController
       flash[:notice] = "新しい商品を登録しました"
       redirect_to admin_items_path
     else
-      render :new
+      flash[:alert] = "すべての情報を入力してください"
+      redirect_to new_admin_item_path
     end
   end
 

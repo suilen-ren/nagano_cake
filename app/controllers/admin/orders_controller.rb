@@ -5,9 +5,10 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
+
     @order = Order.find(params[:id])
     @order.update(order_params)
-    if @order.status == 2
+    if @order.transfered?
       @order.order_items.each do |order_item|
         order_item.update(making_status: 2)
       end

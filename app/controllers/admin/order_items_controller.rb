@@ -8,10 +8,9 @@ class Admin::OrderItemsController < ApplicationController
     @order.order_items.each do |order_item|
       status_check << order_item.making_status
     end
-
-    if status_check.all? {|n| n== 4}
+    if status_check.all?("completed")
       @order.update(status: 4)
-    elsif @order_item.making_status == 3
+    elsif @order_item.processing?
       @order.update(status: 3)
     end
 

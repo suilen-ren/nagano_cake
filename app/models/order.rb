@@ -17,4 +17,13 @@ class Order < ApplicationRecord
   def display_address
     '〒' + ship_postal_code + " " + ship_address + ' ' + ship_name
   end
+
+  def total_quantity
+    i =[]
+    order_items.each do |item|
+      i << item.quantity
+    end
+    i.sum
+  end
+  
 end

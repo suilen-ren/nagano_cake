@@ -34,7 +34,8 @@ class Admin::ItemsController < ApplicationController
       flash[:notice] = "商品の更新が成功しました"
       redirect_to admin_item_path(@item.id)
     else
-      render :edit
+      flash[:alert] = "すべての情報を入力してください"
+      redirect_to edit_admin_item_path(@item.id)
     end
   end
 

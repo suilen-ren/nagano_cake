@@ -1,55 +1,57 @@
-<%= flash[:notice] %>
+<div class ="container p-5">
+  <div class ="row">
+    <div class ="col-10 offset-1">
+      <h4 class ="ml-3 mb-3"><mark><%= @customer.name %>さんの会員情報</mark></h4>
+      <table class ="table table-borderless ml-auto">
+        <tr>
+          <th>会員Id</th>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <th>氏名</th>
+          <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+        </tr>
+        <tr>
+          <th>フリガナ</th>
+          <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+        </tr>
+        <tr>
+          <th>郵便番号</th>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <td><%= @customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+        <th>会員ステータス</th>
+        <td>
+          <% if @customer.is_active == true %>
+            <strong class ="text-success">有効</strong>
+          <% else %>
+            <strong class ="text-secondary">退会</strong>
+          <% end %>
+          </td>
+        </tr>
+      </table>
+      <div class ="text-center">
+        <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success px-3" %>
+      </div>
 
-<h3><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h3>
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan = "2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>会員Id</td>
-      <td><%= @customer.id %></td>
-    </tr>
-    <tr>
-      <td>氏名</td>
-      <td><%= @customer.last_name %> <%= @customer.first_name %></td>
-    </tr>
-    <tr>
-      <td>フリガナ</td>
-      <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
-    </tr>
-    <tr>
-      <td>郵便番号</td>
-      <td><%= @customer.postal_code %></td>
-    </tr>
-    <tr>
-      <td>住所</td>
-      <td><%= @customer.address %></td>
-    </tr>
-    <tr>
-      <td>電話番号</td>
-      <td><%= @customer.telephone_number %></td>
-    </tr>
-    <tr>
-      <td>メールアドレス</td>
-      <td><%= @customer.email %></td>
-    </tr>
-    <tr>
-      <td>会員ステータス</td>
-      <td>
-        <% if @customer.is_active == true %>
-          有効
-        <% else %>
-          退会
-        <% end %>
-      </td>
-    </tr>
-  </tbody>
-</table>
 
-<%= link_to "編集する", edit_admin_customer_path(@customer.id) %>
 
-注文履歴一覧を見る
+
+
+
